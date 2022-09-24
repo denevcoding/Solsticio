@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Cristal
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: -6465566751694194690, guid: 03577f1c77ab03544a42da2bf036c965, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -55,7 +55,23 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_2d5e2fc748044b0fb1e96f9172bd5d5e: 0
+    - Vector1_380a839be1da49aca95e1baff09bf586: 0.529
+    - Vector1_90829e32128548038180108014e2512e: 0
+    - Vector1_e9956af91a1742d5a70ecd31bc6aa6e9: 0.851
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -73,6 +89,9 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
+    - Color_3b8ac234ae6b432fb2c88364c5575b6e: {r: 0.03882155, g: 0.77088505, b: 1.4142135, a: 1}
+    - Color_a4af4b9b784e4c31b157735a22776dbc: {r: 1.0039216, g: 0.1882353, b: 2.9960785, a: 1}
+    - Color_e2ce4e022b8448838bba84499004fadc: {r: 0.6745098, g: 3.7803922, b: 0.28235295, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
