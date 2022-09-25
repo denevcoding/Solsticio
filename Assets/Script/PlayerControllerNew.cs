@@ -8,7 +8,11 @@ public class PlayerControllerNew : MonoBehaviour
     private float horizontalMove;
     private float verticalMove;
     private bool runMove;
-   
+
+
+    public bool isGrounded;
+    public bool isJumping;
+
     private Vector3 playerInput;
     
     public CharacterController player;
@@ -41,17 +45,22 @@ public class PlayerControllerNew : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerInput();
-        
+       
+        isGrounded = player.isGrounded;
+        playerAnimatorController.SetBool("IsGrounded",isGrounded);
+
+        if (isGrounded)
+        {
+            isJumping = false;
+            playerAnimatorController.SetBool("isJumping", isJumping);
+        }
+
+        PlayerInput();        
         //Movimiento camara
         camDirection();
 
+
         SetGravity();
-
-        WalkRun();
-
-        PlayerSkill();
-
         player.Move(movePlayer * Time.deltaTime);
     }
 
@@ -65,8 +74,11 @@ public class PlayerControllerNew : MonoBehaviour
         playerInput = new Vector3(horizontalMove, 0, verticalMove);
         playerInput = Vector3.ClampMagnitude(playerInput, 1);
 
-
         playerAnimatorController.SetFloat("PlayerWalkVelocity", playerInput.magnitude * playerSpeed);
+
+
+        WalkRun();
+        PlayerSkill();
     }
 
     void camDirection()
@@ -85,7 +97,16 @@ public class PlayerControllerNew : MonoBehaviour
         movePlayer = playerInput.x * camRight + playerInput.z * camForward;
         movePlayer = movePlayer * playerSpeed;
 
-        player.transform.LookAt(player.transform.position + movePlayer);
+        if (playerInput.magnitude > 0.1f)
+        {
+            float turnSpeed = 5f;
+            Quaternion dirQ = Quaternion.LookRotation(movePlayer);
+            Quaternion slerp = Quaternion.Slerp(transform.rotation, dirQ, turnSpeed * Time.deltaTime);
+            transform.localRotation = slerp;
+        }
+       
+
+        //player.transform.LookAt(player.transform.position + movePlayer);
 
 
     }
@@ -97,9 +118,13 @@ public class PlayerControllerNew : MonoBehaviour
         //Jump
         if (player.isGrounded && Input.GetButtonDown("Jump"))
         {
+
             fallVelocity = jumpForce;
             movePlayer.y = fallVelocity;
-            playerAnimatorController.SetTrigger("PlayerJump");
+
+            isJumping = true;
+            playerAnimatorController.SetBool("isJumping", isJumping);
+            //playerAnimatorController.SetTrigger("PlayerJump");
         }
     }
     
@@ -141,21 +166,18 @@ public class PlayerControllerNew : MonoBehaviour
 
     public void SetGravity()
     {
-        playerAnimatorController.SetBool("IsGrounded", player.isGrounded);
-        if (player.isGrounded)
-        {
-            fallVelocity = -gravity * Time.deltaTime;
-            movePlayer.y = fallVelocity;
-        }
-        else
-        {
-            fallVelocity -= gravity * Time.deltaTime;
-            movePlayer.y = fallVelocity;
+        fallVelocity -= gravity * Time.deltaTime;
+        movePlayer.y = fallVelocity;
+        //if (player.isGrounded)
+        //{
+        //    fallVelocity = -gravity * Time.deltaTime;
+        //    movePlayer.y = fallVelocity;
+        //}
+        //else
+        //{
+           
             
-        }
-
-
-
+        //}
         
 
         playerAnimatorController.SetFloat("PlayerVerticalVelocity", player.velocity.y);

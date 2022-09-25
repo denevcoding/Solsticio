@@ -66,48 +66,6 @@ public class EnemyController : MonoBehaviour
             Following();
         }
         
-
-
-
-
-
-        //if (player != null)
-        //{
-
-        //}
-        //BeAler = Physics.CheckSphere(transform.position, AlertRage, LayerPlayer);
-
-        //if (BeAler == true)
-        //{
-        //    BeAbleEnemy = true;
-        //    Vector3 PosPlayer = new Vector3(Player.position.x, transform.position.y, Player.position.z);
-        //    EnemyAnimatorController.SetBool("BeAbleEnemy", true);
-        //    audioSourceEnemy.Play();
-        //    transform.LookAt(PosPlayer);
-
-        //    player = GameObject.Find("Android");
-
-        //}
-        //else
-        //{
-        //    EnemyAnimatorController.SetBool("BeAbleEnemy", false);
-        //    EnemyAnimatorController.SetBool("Attack", false);
-        //}
-
-
-
-        ////EnemyAnimatorController.SetBool("BeAbleEnemy", true);
-        ////transform.position = Vector3.MoveTowards(transform.position, PosPlayer,Velocity*Time.deltaTime);
-
-
-        //if (BeAler == true && Vector3.Distance(transform.position, Player.position) < 3)
-        //{
-        //    Vector3 PosPlayer = new Vector3(Player.position.x, transform.position.y, Player.position.z);
-        //    EnemyAnimatorController.SetBool("Attack", true);
-        //    transform.LookAt(PosPlayer);
-        //    transform.position = Vector3.MoveTowards(transform.position, PosPlayer, Velocity * Time.deltaTime);
-        //}
-
     }
 
     public void Waiting()
@@ -120,13 +78,12 @@ public class EnemyController : MonoBehaviour
             EnemyAnimatorController.SetBool("BeAbleEnemy", true);
             enemyState = EnemyState.Alert;
             return;
-
         }       
     }
 
     public void Alerting()
     {
-        transform.LookAt(new Vector3(player.transform.position.x, 0f, player.transform.position.z));
+        transform.LookAt(new Vector3(player.transform.position.z, 0f, player.transform.position.z));
 
         if (Vector3.Distance(transform.position, player.transform.position) < 3)
         {
@@ -138,7 +95,7 @@ public class EnemyController : MonoBehaviour
     {
         Vector3 PosPlayer = player.transform.position;
         Vector3 dirTolook = new Vector3(player.transform.position.x, 0f ,player.transform.position.z);
-        transform.LookAt(dirTolook);
+        //transform.LookAt(dirTolook);
         transform.position = Vector3.MoveTowards(transform.position, PosPlayer, Velocity * Time.deltaTime);
 
         EnemyAnimatorController.SetBool("Attack", true);
